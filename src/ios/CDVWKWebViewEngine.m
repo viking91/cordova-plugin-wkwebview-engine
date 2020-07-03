@@ -136,10 +136,12 @@
 
 
     if (@available(iOS 13.4, *)) {} else {
-      [[NSNotificationCenter defaultCenter]
-         addObserver:self
-         selector:@selector(keyboardWillHide)
-         name:UIKeyboardWillHideNotification object:nil];
+      if (@available(iOS 11.0, *)) { // adjustedContentInset is only available on iOS 11.0 or newer
+        [[NSNotificationCenter defaultCenter]
+           addObserver:self
+           selector:@selector(keyboardWillHide)
+           name:UIKeyboardWillHideNotification object:nil];
+      }
     }
 
     NSLog(@"Using WKWebView");
